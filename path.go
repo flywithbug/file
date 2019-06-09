@@ -1,14 +1,11 @@
 package file
 
 import (
-	"path/filepath"
 	"os"
-	"strings"
 	"path"
+	"path/filepath"
+	"strings"
 )
-
-
-
 
 // CurrentDir return current commond path
 func CurrentDir() (string, error) {

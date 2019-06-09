@@ -2,26 +2,26 @@ package file
 
 import (
 	"errors"
-	"os"
 	"io/ioutil"
+	"os"
+	"path"
 	"path/filepath"
 	"strings"
-	"path"
 )
 
-func DirectoryExists(path string)bool  {
+func DirectoryExists(path string) bool {
 	if len(path) == 0 {
 		return false
 	}
 	fileinfo, err := os.Stat(path)
-	if err != nil{
+	if err != nil {
 		return false
 	}
 	return fileinfo.IsDir()
 }
 
-func ListDirectory(path string, recursive bool,callback  ListDirectCallbackFunc)  {
-	if callback == nil{
+func ListDirectory(path string, recursive bool, callback ListDirectCallbackFunc) {
+	if callback == nil {
 		return
 	}
 	if !DirectoryExists(path) {
@@ -45,7 +45,6 @@ func ListDirectory(path string, recursive bool,callback  ListDirectCallbackFunc)
 		}
 	}
 }
-
 
 // CopyDirectory copy src directory to des
 // if directory is not exists, create it using os.ModePerm
@@ -101,4 +100,21 @@ func Mkdir(dir string, mode os.FileMode) error {
 		return os.Mkdir(dir, mode)
 	}
 	return nil
+}
+
+func DirList(dirpath string) ([]string, error) {
+	var list []string
+	err := filepath.Walk(dirpath,
+		func(path string, f os.FileInfo, err error) error {
+			if f == nil {
+				return err
+			}
+			if f.IsDir() {
+				list = append(list, path)
+				return nil
+			}
+
+			return nil
+		})
+	return list, err
 }

@@ -1,17 +1,16 @@
 package file
 
 import (
-	"errors"
-	"os"
-	"path"
-	"io"
 	"bufio"
 	"crypto/md5"
 	"encoding/hex"
-	"strings"
+	"errors"
+	"io"
 	"io/ioutil"
+	"os"
+	"path"
+	"strings"
 )
-
 
 // FileExists return a bool value that file is exist or not
 func FileExists(path string) bool {
@@ -25,7 +24,6 @@ func FileExists(path string) bool {
 
 	return !stat.IsDir()
 }
-
 
 // CopyFile copy file from src to des
 func CopyFile(src, des string, mkdir bool) (w int64, err error) {
@@ -99,7 +97,6 @@ func FileMD5(file *os.File) (string, error) {
 	return hex.EncodeToString(md5Ctx.Sum(nil)), nil
 }
 
-
 // WriteFile file directory decursively
 func WriteFile(filePath string, data []byte, cover bool, mode os.FileMode) error {
 	if data == nil {
@@ -122,3 +119,8 @@ func WriteFile(filePath string, data []byte, cover bool, mode os.FileMode) error
 	}
 	return nil
 }
+
+
+
+
+

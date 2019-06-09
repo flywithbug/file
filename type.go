@@ -12,12 +12,10 @@ import (
 // stop: If stop be setted true in callback function, the ReadLine function will stop
 type ReadLineCallbackFunc func(line string, finished bool, err error, stop *bool)
 
-
 // ListDirectCallbackFunc is callback function type definition for ListDirectory function
 // file: file info object
 // err: Error for list directory
 type ListDirectCallbackFunc func(file FileInfo, err error)
-
 
 // FileInfo redefine os.FileInfo
 type FileInfo interface {
